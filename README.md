@@ -8,6 +8,7 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 * [Shiftview](https://lists.suckless.org/dev/1104/7590.html)
 * [Focus Fullscreen](https://dwm.suckless.org/patches/focusfullscreen/)
 * [Layoutscroll](https://dwm.suckless.org/patches/layoutscroll/)
+* [Bottomstack](https://dwm.suckless.org/patches/bottomstack/)
 
 ## Custom patches:
 * Shifttag - shift window to the next/previous tag
