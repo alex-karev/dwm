@@ -979,7 +979,7 @@ focus(Client *c)
 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
 		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
 	}
-	if(selmon->sel && selmon->sel->isfullscreen){
+	if(selmon->sel && selmon->sel->isfullscreen && c && c->tags == selmon->sel->tags){
 		togglefullscreen();
 		selmon->sel = c;
 		togglefullscreen();

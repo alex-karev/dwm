@@ -10,3 +10,4 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 
 ## Custom patches:
 * Shifttag - shift window to the next/previous tag
+* Focus Fullscreen Pertag -  Make Focus Fullscreen to work as Pertag layout
