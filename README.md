@@ -10,6 +10,7 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 * [Layoutscroll](https://dwm.suckless.org/patches/layoutscroll/)
 * [Bottomstack](https://dwm.suckless.org/patches/bottomstack/)
 * [Movestack](https://dwm.suckless.org/patches/movestack/)
+* [Cursorwarp](https://dwm.suckless.org/patches/cursorwarp/)
 
 ## Custom patches:
 * Shifttag - shift window to the next/previous tag
