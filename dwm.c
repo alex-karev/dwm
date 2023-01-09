@@ -227,7 +227,7 @@ static void tagmon(const Arg *arg);
 static void tile(Monitor *m);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
-static void togglefullscreen(const Arg *arg);
+static void togglefullscreen();
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
@@ -979,7 +979,13 @@ focus(Client *c)
 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
 		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
 	}
-	selmon->sel = c;
+	if(selmon->sel && selmon->sel->isfullscreen){
+		togglefullscreen();
+		selmon->sel = c;
+		togglefullscreen();
+	}else{
+		selmon->sel = c;
+	}
 	drawbars();
 	drawtabs();
 }
@@ -1917,7 +1923,7 @@ togglefloating(const Arg *arg)
 }
 
 void
-togglefullscreen(const Arg *arg)
+togglefullscreen()
 {
   if(selmon->sel)
     setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
@@ -1992,6 +1998,7 @@ unmanage(Client *c, int destroyed)
 {
 	Monitor *m = c->mon;
 	XWindowChanges wc;
+	int fullscreen = (selmon->sel == c && selmon->sel->isfullscreen)?1:0;
 
 	detach(c);
 	detachstack(c);
@@ -2009,6 +2016,9 @@ unmanage(Client *c, int destroyed)
 	}
 	free(c);
 	focus(NULL);
+	if(fullscreen){
+		togglefullscreen();
+	}
 	updateclientlist();
 	arrange(m);
 }

@@ -6,6 +6,7 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 * [Tab](https://dwm.suckless.org/patches/tab/)
 * [Actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/)
 * [Shiftview](https://lists.suckless.org/dev/1104/7590.html)
+* [Focus Fullscreen](https://dwm.suckless.org/patches/focusfullscreen/)
 
 ## Custom patches:
 * Shifttag - shift window to the next/previous tag
