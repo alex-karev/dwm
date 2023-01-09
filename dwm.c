@@ -37,6 +37,7 @@
 #include <X11/Xproto.h>
 #include <X11/Xutil.h>
 #ifdef XINERAMA
+#define DWM_VERSION "dwm-6.4"
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
 #include <X11/Xft/Xft.h>
@@ -2040,7 +2041,7 @@ void
 updatestatus(void)
 {
 	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-		strcpy(stext, "dwm-"VERSION);
+		strcpy(stext, DWM_VERSION);
 	drawbar(selmon);
 }
 
@@ -2204,7 +2205,7 @@ int
 main(int argc, char *argv[])
 {
 	if (argc == 2 && !strcmp("-v", argv[1]))
-		die("dwm-"VERSION);
+		die(DWM_VERSION);
 	else if (argc != 1)
 		die("usage: dwm [-v]");
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
