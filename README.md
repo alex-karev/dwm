@@ -19,3 +19,4 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 ## Custom patches:
 * [Shifttag](https://github.com/alex-karev/dwm/commit/a7bc324e100fb0fcbf8c36e29d4ac0d73830a299) - shift window to the next/previous tag
 * [Focus Fullscreen Pertag](https://github.com/alex-karev/dwm/commit/0928ecc1640970d7f5b2a3d313fcccfb822c462b) -  Make Focus Fullscreen to work as Pertag layout
+* [Barpadding with Fullgaps]() - Merge barpadding and fullgaps functionality
