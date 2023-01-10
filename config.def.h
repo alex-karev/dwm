@@ -30,6 +30,15 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+/* screen indicators */
+static const char *screen_symbols[] = {"\uf109", "\uf878", "\uf26c"};
+static const char *screen_symbol_colors[][3]      = {
+	/*               fg         bg         border   */
+	[0]          = { col_gray3,  col_gray1,  col_gray2  },
+	[1]          = { col_gray3,  col_gray1,  col_gray2  },
+	[2]          = { col_gray3,  col_gray1,  col_gray2  },
+};
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
