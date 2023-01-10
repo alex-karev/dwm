@@ -61,7 +61,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeLayout}; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeTabSel, SchemeLayout}; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetDesktopNames, NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetLast }; /* EWMH atoms */
@@ -862,8 +862,8 @@ drawbar(Monitor *m)
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - sw - 2 * m->gappx, 0, sw, bh, 0, stext, 0);
+		tw = TEXTW(stext); /* 2px right padding */
+		drw_text(drw, m->ww - sw - 2 * m->gappx, 0, sw, bh, lrpad/2, stext, 0);
 	}
 
 	for (c = m->cl->clients; c; c = c->next) {
@@ -954,7 +954,7 @@ drawtab(Monitor *m) {
 	}
 
 	if(0 <= itag  && itag < LENGTH(tags)){
-	  snprintf(view_info, sizeof view_info, "[%s]", tags[itag]);
+	  snprintf(view_info, sizeof view_info, "[%d]", itag);
 	} else {
 	  strncpy(view_info, "[...]", sizeof view_info);
 	}
@@ -991,8 +991,8 @@ drawtab(Monitor *m) {
 	  if(i >= m->ntabs) break;
 	  if(m->tab_widths[i] >  maxsize) m->tab_widths[i] = maxsize;
 	  w = m->tab_widths[i];
-	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeSel : SchemeNorm]);
-	  drw_text(drw, x, 0, w, th, 0, c->name, 0);
+	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeNorm]);
+	  drw_text(drw, x, 0, w, th, lrpad/2, c->name, 0);
 	  x += w;
 	  ++i;
 	}
@@ -1001,12 +1001,12 @@ drawtab(Monitor *m) {
 
 	/* cleans interspace between window names and current viewed tag label */
 	w = m->ww - view_info_w - x;
-	drw_text(drw, x, 0, w, th, 0, "", 0);
+	drw_text(drw, x, 0, w, th, lrpad/2, "", 0);
 
 	/* view info */
 	x += w;
 	w = view_info_w;
-	drw_text(drw, x-m->gappx, 0, w, th, 0, view_info, 0);
+	drw_text(drw, x-m->gappx, 0, w, th, lrpad/2, view_info, 0);
 
 	drw_map(drw, m->tabwin, 0, 0, m->ww, th);
 }
@@ -1925,8 +1925,8 @@ setup(void)
 	drw = drw_create(dpy, screen, root, sw, sh);
 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
 		die("no fonts could be loaded.");
-	lrpad = drw->fonts->h;
-	bh = drw->fonts->h + 2;
+	lrpad = drw->fonts->h + horizpadbar;
+	bh = drw->fonts->h + 2 + vertpadbar;
 	th = bh;
 	updategeom();
 	/* init atoms */

@@ -6,6 +6,8 @@ static const unsigned int gappx     = 10;
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
++static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
++static const int vertpadbar         = 0;        /* vertical padding for statusbar */
 
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */
@@ -25,6 +27,7 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm]   = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]    = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeTabSel]    = { col_gray4, col_cyan,  col_cyan  },
 	[SchemeLayout] = { col_gray3, col_gray1, col_gray2 },
 };
 
