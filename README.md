@@ -13,6 +13,7 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 * [Cursorwarp](https://dwm.suckless.org/patches/cursorwarp/)
 * [Single tagset](https://dwm.suckless.org/patches/single_tagset/)
 * [EWMHtags](https://dwm.suckless.org/patches/ewmhtags/)
+* [Fullgaps](https://dwm.suckless.org/patches/fullgaps/)
 
 ## Custom patches:
 * [Shifttag](https://github.com/alex-karev/dwm/commit/a7bc324e100fb0fcbf8c36e29d4ac0d73830a299) - shift window to the next/previous tag
