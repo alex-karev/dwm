@@ -886,8 +886,8 @@ drawbar(Monitor *m)
 	drw_setscheme(drw, scheme[SchemeLayout]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
-	drw_setscheme(drw, screen_symbol_scheme[m->num]);
-	x = drw_text(drw, x, 0, w, bh, lrpad / 2, screen_symbols[m->num], 0);
+	drw_setscheme(drw, screen_symbol_scheme[selmon->num]);
+	x = drw_text(drw, x, 0, w, bh, lrpad / 2, screen_symbols[selmon->num], 0);
 
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
