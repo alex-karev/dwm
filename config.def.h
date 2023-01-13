@@ -8,6 +8,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 +static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 +static const int vertpadbar         = 0;        /* vertical padding for statusbar */
+#define COMP_RESTART                 {"picom-manager", "-r", "-c", "0", NULL}
+#define COMP_RESTART_GAPS            {"picom-manager", "-r", "-c", "15", NULL}
 
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */

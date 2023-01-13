@@ -312,6 +312,10 @@ static Clientlist *cl;
 /* configuration, allows nested code to access above variables */
 #include "config.h"
 
+/* Compositor integration */
+static const Arg comp_restart = {.v = (const char*[])COMP_RESTART};
+static const Arg comp_restart_gaps = {.v = (const char*[])COMP_RESTART_GAPS};
+
 struct Pertag {
 	unsigned int curtag, prevtag; /* current and previous tag */
 	int nmasters[LENGTH(tags) + 1]; /* number of windows in master area */
@@ -1848,10 +1852,16 @@ setfullscreen(Client *c, int fullscreen)
 void
 setgaps(const Arg *arg)
 {
-	if ((arg->i == 0) || (selmon->gappx + arg->i < 0))
+	if ((arg->i == 0) || (selmon->gappx + arg->i < 0)) {
+		if (comp_integration && selmon->gappx > 0)
+			spawn(&comp_restart);
 		selmon->gappx = 0;
-	else
+	}
+	else {
+		if (comp_integration && selmon->gappx <= 0)
+			spawn(&comp_restart_gaps);
 		selmon->gappx += arg->i;
+	}
 	arrange(selmon);
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx + selmon->gappx, selmon->by + selmon->gappx, selmon->ww - 2 * selmon->gappx, bh);
