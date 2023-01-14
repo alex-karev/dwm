@@ -23,3 +23,4 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 * [Barpadding with Fullgaps](https://github.com/alex-karev/dwm/commit/0a1ed87449f5eec1c1d53753e99aa1d4853bf608) - Merge barpadding and fullgaps functionality
 * [Screen Indicator](https://github.com/alex-karev/dwm/commit/36b6e8ecb46f697918a10019fad99a073508b5fa) - Indicator which shows currently focused screen in bar
 * [Compositor integration]() - Restart compositor with different arguments depending on gaps
+* [Cut bar title]() - Cuts bar title to fit specified width
