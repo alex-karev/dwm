@@ -522,7 +522,7 @@ void
 buttonpress(XEvent *e)
 {
 	int i, x;
-	unsigned int click;
+	unsigned int click = 0;
 	Arg arg = {0};
 	Client *c;
 	Monitor *m;
