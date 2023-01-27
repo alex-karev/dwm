@@ -71,6 +71,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class                    instance    title       tags mask     isfloating   monitor */	
+	{ "trayer",                  NULL,       NULL,       0,            1,           -1 },
+
 	{ "Code",                    NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "code-oss",                NULL,       NULL,       1 << 0,       0,           -1 },
 	  
