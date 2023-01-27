@@ -6,11 +6,12 @@ static const unsigned int gappx     = 10;
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-+static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
-+static const int vertpadbar         = 0;        /* vertical padding for statusbar */
+static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
+static const int vertpadbar         = 0;        /* vertical padding for statusbar */
 static const int title_width         = 10;
-#define COMP_RESTART                 {"picom-manager", "-r", "-c", "0", NULL}
-#define COMP_RESTART_GAPS            {"picom-manager", "-r", "-c", "15", NULL}
+static const int comp_integration    = 1;        /* enable compositor integration */
+static const char *restart_compositor_cmd[] = {"picom-manager", "-r", "-c", "0", NULL};
+static const char *restart_compositor_gaps_cmd[] = {"picom-manager", "-r", "-c", "15", NULL};
 
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */
@@ -21,17 +22,41 @@ static const int toptab				= 0;               /* False means bottom tab bar */
 
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
+static const char col_bg[]          = "#282828";
+static const char col_fg[]          = "#ebdbb2";
+static const char col_fg1[]         = "#928374";
+static const char col_fg2[]         = "#504945";
+static const char col_border[]      = "#282828";
+static const char col_border_sel[]  = "#928374";
+static const char col_gray[]        = "#928374";
+static const char col_red[]         = "#fb4934";
+static const char col_green[]       = "#b8bb26";
+static const char col_yellow[]      = "#fabd2f";
+static const char col_cyan[]        = "#83a598";
+static const char col_purple[]      = "#d3869b";
+static const char col_aqua[]        = "#8ec07c";
+
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+
+enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
+       SchemeCol5, SchemeCol6, SchemeSel, SchemeTabSel, SchemeLayout }; /* color schemes */
+
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm]   = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]    = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeTabSel]    = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeLayout] = { col_gray3, col_gray1, col_gray2 },
+	/*                      fg          bg          border   */
+	[SchemeNorm]    = { col_fg2,          col_bg,     col_border },
+	[SchemeCol1]    = { col_red,          col_bg,     col_border },
+	[SchemeCol2]    = { col_green,        col_bg,     col_border },
+	[SchemeCol3]    = { col_yellow,       col_bg,     col_border },
+	[SchemeCol4]    = { col_cyan,         col_bg,     col_border },
+	[SchemeCol5]    = { col_purple,       col_bg,     col_border },
+	[SchemeCol6]    = { col_aqua,         col_bg,     col_border },
+	[SchemeSel]     = { col_fg,           col_bg,     col_border  },
+	[SchemeTabSel]  = { col_bg,           col_fg,     col_border  },
+	[SchemeLayout]  = { col_purple,       col_bg,     col_border  },
 };
 
 /* tagging */
