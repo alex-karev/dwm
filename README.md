@@ -68,7 +68,7 @@ sudo make install
 6. Add dunst, dwmblocks and dwm to your ```.xinitrc```:
 
 ```
-/usr/bin/dunst &
+/usr/bin/dunst -conf $HOME/.config/dunst/dunstrc &
 dwmblocks &
 exec dwm-start
 ```
