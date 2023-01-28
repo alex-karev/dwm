@@ -1,0 +1,24 @@
+#!/bin/sh
+HELP_MSG="Toggles trayer.\nUsage: toggle-tray [arguments]\nArguments:\n\t-h - Show this message\n\t-c - set background color (in hex)"
+TRAY_BG="000000"
+
+while getopts "c:h" o; do
+    case "${o}" in
+        c)
+            TRAY_BG=${OPTARG}
+            ;;
+        h)
+            echo -e $HELP_MSG
+            exit;
+            ;;
+        *)
+            echo -e $HELP_MSG
+            exit;
+            ;;
+    esac
+done
+
+TRAY_BG=$(echo $TRAY_BG | cut -c2-)
+TRAY_BG_DECIMAL=$(echo "obase=10; ibase=16; $TRAY_BG" | bc)
+
+pkill trayer || trayer --tint $TRAY_BG_DECIMAL --width 20 --edge right --distancefrom left --distance 10 #--distancefrom left --distance 200
