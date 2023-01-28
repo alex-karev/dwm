@@ -13,6 +13,31 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 * Bottomstack layouts
 * Current screen indicator in status bar
 
+## Installation
+1. Install dependencies:
+
+```
+sudo pacman -S wireless_tools acpi top flameshot rofi trayer dunst pamixer libcanberra xorg-xbacklight
+```
+
+2. Clone this repo, build and install dwm:
+
+```
+git clone https://github.com/alex-karev/dwm.git
+cd dwm
+make
+sudo make install
+```
+
+3. Make scripts in ```scripts``` directory executable and copy them to ```~/.local/bin/``` *(or wherever you store your scripts)*:
+
+```
+chmod +x scripts/*
+cp scripts/* ~/.local/bin/
+```
+
+4. *OPTIONAL:* Add ```$HOME/.local/bin``` to path
+
 ## Applied patches:
 * [Pertag](https://dwm.suckless.org/patches/pertag/)
 * [Tab](https://dwm.suckless.org/patches/tab/)
