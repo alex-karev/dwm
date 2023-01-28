@@ -37,3 +37,4 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 * Screen Indicator - Indicator which shows currently focused screen in bar
 * Compositor integration - Restart compositor with different arguments depending on gaps
 * Cut bar title - Cuts bar title to fit specified width
+* Movefullscreen - fullscreen windows can be moved to another monitor

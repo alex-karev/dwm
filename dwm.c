@@ -500,8 +500,16 @@ attachclients(Monitor *m) {
 				c->tags = c->tags & m->tagset[m->seltags];
 				rmons = True;
 			}
-			unfocus(c, True);
-			c->mon = m;
+			if (c->isfullscreen) {
+				setfullscreen(c, False);
+				unfocus(c, True);
+				c->mon = m;
+				setfullscreen(c, True);
+			}
+			else {
+				unfocus(c, True);
+				c->mon = m;
+			}
 		}
 
 	if (rmons)
