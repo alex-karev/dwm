@@ -38,6 +38,48 @@ cp scripts/* ~/.local/bin/
 
 4. *OPTIONAL:* Add ```$HOME/.local/bin``` to path
 
+5. Configure and install ```dwmblocks-async``` or any other dwmblocks implementation:
+```
+git clone https://github.com/UtkarshVerma/dwmblocks-async.git
+cd dwmblocks-async
+```
+
+Change dwmblocks' ```config.h``` to something like this:
+```
+#define CMDLENGTH 45
+#define DELIMITER "  "
+#define CLICKABLE_BLOCKS
+
+const Block blocks[] = {
+        BLOCK("statbar --wireless",   3,    18),
+        BLOCK("statbar --battery",   10,    18),
+        BLOCK("statbar --cpu",   2,    18),
+        BLOCK("statbar --ram",   5,    18),
+        BLOCK("statbar --date",   60,    18),
+        BLOCK("statbar --time",   5,    18)
+};
+```
+
+Compile and install dwmblocks:
+```
+sudo make install
+```
+
+6. Add dunst, dwmblocks and dwm to your ```.xinitrc```:
+
+```
+/usr/bin/dunst &
+dwmblocks &
+exec dwm-start
+```
+
+## Configuration
+Edit ```config.h``` to change keybindings, appearance and default apps. Recompile and reinstall dwm.
+
+Edit ```scripts/statbar``` to change the appearance and functionality of the status bar widgets. Remember to copy it to your ```~/.local/bin/``` again after changing.
+
+Edit dwmblocks' ```config.h``` to configure the status bar. Recompiler and reinstall dwmblocks.
+
 ## Applied patches:
 * [Pertag](https://dwm.suckless.org/patches/pertag/)
 * [Tab](https://dwm.suckless.org/patches/tab/)
