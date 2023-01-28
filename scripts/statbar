@@ -1,0 +1,100 @@
+#!/bin/bash
+
+# Settings
+WIRELESS_INTERFACE="wlp0s20f3"
+TIME_FORMAT="%I:%M %p"
+DATE_FORMAT="%b %d %a"
+
+# Colors
+COL_NORM="\x0b"
+COL_RED="\x0c"
+COL_GREEN="\x0d"
+COL_YELLOW="\x0e"
+COL_CYAN="\x0f"
+COL_PURPLE="\x10"
+COL_AQUA="\x11"
+COL_SEL="\x12"
+COL_TAB_SEL="\x13"
+
+# Widget Colors
+DATE_COLOR=$COL_PURPLE
+TIME_COLOR=$COL_AQUA
+WIRELESS_COLOR=$COL_GREEN
+BATTERY_COLOR=$COL_YELLOW
+CPU_COLOR=$COL_RED
+RAM_COLOR=$COL_CYAN
+NETWORK_RX_COLOR=$COL_AQUA
+NETWORK_TX_COLOR=$COL_AQUA
+
+# Icons
+DATE_ICON="\uf073"
+TIME_ICON="\uf017"
+WIRELESS_ICON="\ufaa8"
+WIRELESS_NO_CONNECTION_ICON="\ufaa9"
+BATTERY_DISCHARGE_ICON="\uf578"
+BATTERY_CHARGE_ICON="\uf583"
+CPU_ICON="\ufb19"
+RAM_ICON="\uf85a"
+NETWORK_RX_ICON="RX"
+NETWORK_TX_ICON="TX"
+
+# Help Message
+HELP_MSG="Display system info for usage with different status bars. \nUsage: statbar [arguments]\nArguments:\n\t--help - show this message\n\t--date - show current date (formated)\n\t--time - show current time (formated)\n\t--wireless - show wireless signal level\n\t--battery - show battery charge\n\t--cpu show cpu load\n\t--ram show memory load\n\t--networkrx - show network RX\n\t--networktx - show network TX"
+
+# Execution
+for arg in "$@"; do
+  shift
+  case "$arg" in
+    '--help')
+        echo -e $HELP_MSG
+        ;;
+    '--date')
+        echo -e $DATE_COLOR$DATE_ICON $(date +"$DATE_FORMAT")
+        ;;
+    '--time')
+        echo -e $TIME_COLOR$TIME_ICON $(date +"$TIME_FORMAT")
+        ;;
+    '--wireless')
+        link_essid=$(iwconfig $WIRELESS_INTERFACE | grep -o -P '(?<=ESSID:).*')
+        if [ "$link_essid" = "off/any  " ]; then
+            echo -e $WIRELESS_COLOR$WIRELESS_NO_CONNECTION_ICON
+        else
+            link_quality=$(iwconfig $WIRELESS_INTERFACE | grep -o -P '(?<=Quality=).*(?= Signal)' | cut -d '/' -f 1)
+            link_quality_max=$(iwconfig $WIRELESS_INTERFACE | grep -o -P '(?<=Quality=).*(?= Signal)' | cut -d '/' -f 2)
+            link_percent=$(echo "scale=2 ; $link_quality / $link_quality_max * 100" | bc | rev | cut -c4- | rev)
+
+            echo -e $WIRELESS_COLOR$WIRELESS_ICON $link_percent%
+        fi
+        ;;
+    '--battery')
+        battery_status=$(acpi | grep -o -P '(?<=: ).*(?=,.*%)')
+        battery=$(acpi | grep -o -P '(?<=, ).*(?=%)')
+        if [ "$battery_status" = "Discharging" ]; then
+            echo -e $BATTERY_COLOR$BATTERY_DISCHARGE_ICON $battery%
+        else
+            echo -e $BATTERY_COLOR$BATTERY_CHARGE_ICON $battery%
+        fi
+        ;;
+    '--cpu') 
+        cpu=$(top -bn1 | awk '/Cpu/ {print $2}' | rev | cut -c3- | rev)
+        echo -e $CPU_COLOR$CPU_ICON $cpu%
+        ;;
+    '--ram')
+        ram_available=$(cat /proc/meminfo | awk '/MemAvailable/ {print $2}')
+        ram_total=$(cat /proc/meminfo | awk '/MemTotal/ {print $2}')
+        ram_percent=$(echo "scale=2 ; 100 - ($ram_available / $ram_total * 100)" | bc | rev | cut -c4- | rev)
+        echo -e $RAM_COLOR$RAM_ICON $ram_percent%
+        ;;
+    '--networkrx')
+        rx=$(ifstat -t 1 | awk "/$WIRELESS_INTERFACE/ {print $6}")
+        echo -e $NETWORK_RX_COLOR$NETWORK_RX_ICON $rx
+        ;;
+    '--networktx')     
+        tx=$(ifstat -t 1 | awk "/$WIRELESS_INTERFACE/ {print $8}")
+        echo -e $NETWORK_RX_COLOR$NETWORK_RX_ICON $tx
+        ;;
+    *)
+        echo -e $HELP_MSG
+        ;;
+  esac
+done
