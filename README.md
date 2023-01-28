@@ -3,7 +3,15 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 
 <img src="https://github.com/alex-karev/dwm/raw/main/screenshot.png">
 
-## Features:
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Configuration](#configuration)
+4. [Applied patches](#applied-patches)
+5. [Custom changes](#custom-changes)
+
+## Features
 * Gaps with compositor(picom) integration to disable/enable round corners
 * Dwmblocks integration
 * Multiple monitors with single tagset
@@ -88,7 +96,7 @@ cp dunstrc ~/.config/dunst/dunstrc
 
 * Edit ```dunstrc``` to change the appearance of dunst (Sound and Brightness change notifications)
 
-## Applied patches:
+## Applied patches
 * [Pertag](https://dwm.suckless.org/patches/pertag/)
 * [Tab](https://dwm.suckless.org/patches/tab/)
 * [Actualfullscreen](https://dwm.suckless.org/patches/actualfullscreen/)
@@ -105,7 +113,7 @@ cp dunstrc ~/.config/dunst/dunstrc
 * [Statuspadding](https://dwm.suckless.org/patches/statuspadding/)
 * [Dwmblocks](https://github.com/torrinfail/dwmblocks)
 
-## Custom changes:
+## Custom changes
 * Shifttag - shift window to the next/previous tag
 * Focus Fullscreen Pertag -  Make Focus Fullscreen to work as Pertag layout
 * Barpadding with Fullgaps - Merge barpadding and fullgaps functionality
