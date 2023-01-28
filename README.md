@@ -4,7 +4,6 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 <img src="https://github.com/alex-karev/dwm/raw/main/screenshot.png">
 
 ## Table of Contents
-
 1. [Features](#features)
 2. [Installation](#installation)
 3. [Configuration](#configuration)
@@ -86,6 +85,8 @@ exec dwm-start
 mkdir ~/.config/dunst
 cp dunstrc ~/.config/dunst/dunstrc
 ```
+
+8, *OPTIONAL:* For rounded corners support use [this](https://github.com/ibhagwan/picom-ibhagwan-git.git) fork of ```picom```
 
 ## Configuration
 * Edit ```config.h``` to change keybindings, appearance and default apps. Recompile and reinstall dwm.
