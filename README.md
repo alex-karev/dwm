@@ -73,12 +73,20 @@ dwmblocks &
 exec dwm-start
 ```
 
+7. *OPTIONAL:* Copy dunstrc to ```~/.config/dunst/```:
+```
+mkdir ~/.config/dunst
+cp dunstrc ~/.config/dunst/dunstrc
+```
+
 ## Configuration
-Edit ```config.h``` to change keybindings, appearance and default apps. Recompile and reinstall dwm.
+* Edit ```config.h``` to change keybindings, appearance and default apps. Recompile and reinstall dwm.
 
-Edit ```scripts/statbar``` to change the appearance and functionality of the status bar widgets. Remember to copy it to your ```~/.local/bin/``` again after changing.
+* Edit ```scripts/statbar``` to change the appearance and functionality of the status bar widgets. Remember to copy it to your ```~/.local/bin/``` again after changing.
 
-Edit dwmblocks' ```config.h``` to configure the status bar. Recompiler and reinstall dwmblocks.
+* Edit dwmblocks' ```config.h``` to configure the status bar. Recompiler and reinstall dwmblocks.
+
+* Edit ```dunstrc``` to change the appearance of dunst (Sound and Brightness change notifications)
 
 ## Applied patches:
 * [Pertag](https://dwm.suckless.org/patches/pertag/)
