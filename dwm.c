@@ -1145,6 +1145,8 @@ focusmon(const Arg *arg)
 	focus(NULL);
 	if (selmon->sel)
 		XWarpPointer(dpy, None, selmon->sel->win, 0, 0, 0, 0, selmon->sel->w/2, selmon->sel->h/2);
+	else
+		XWarpPointer(dpy, None, selmon->barwin, 0, 0, 0, 0, selmon->ww/2, selmon->wh/2);
 }
 
 void
