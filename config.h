@@ -210,6 +210,11 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume,  	spawn,   {.v = increaseVolume} },
 	{ 0,                            XF86XK_AudioLowerVolume,  	spawn,   {.v = decreaseVolume} },
 	{ 0,                            XF86XK_AudioMute,           spawn,   {.v = muteVolume} },
+	{ MODKEY,                       XK_F12,  	                spawn,   {.v = increaseBrightness } },
+	{ MODKEY,                       XK_F11,  	                spawn,   {.v = decreaseBrightness} },
+	{ MODKEY,                       XK_F3,  	                spawn,   {.v = increaseVolume} },
+	{ MODKEY,                       XK_F2,  	                spawn,   {.v = decreaseVolume} },
+	{ MODKEY,                       XK_F1,                      spawn,   {.v = muteVolume} },
 	TAGKEYS(                        XK_1,                       0)
 	TAGKEYS(                        XK_2,                       1)
 	TAGKEYS(                        XK_3,                       2)
