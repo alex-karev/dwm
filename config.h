@@ -37,7 +37,7 @@ static const char col_purple[]      = "#d3869b";
 static const char col_aqua[]        = "#8ec07c";
 
 enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
-       SchemeCol5, SchemeCol6, SchemeSel, SchemeTabSel, SchemeLayout }; /* color schemes */
+       SchemeCol5, SchemeCol6, SchemeSel, SchemeTabNorm, SchemeTabSel, SchemeLayout }; /* color schemes */
 
 static const char *colors[][3]      = {
 	/*                      fg          bg          border   */
@@ -49,6 +49,7 @@ static const char *colors[][3]      = {
 	[SchemeCol5]    = { col_purple,       col_bg,     col_border },
 	[SchemeCol6]    = { col_aqua,         col_bg,     col_border },
 	[SchemeSel]     = { col_fg,           col_bg,     col_border  },
+	[SchemeTabNorm] = { col_fg,           col_bg,     col_fg  },
 	[SchemeTabSel]  = { col_bg,           col_fg,     col_border  },
 	[SchemeLayout]  = { col_purple,       col_bg,     col_border  },
 };/* color schemes */

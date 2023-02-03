@@ -1038,7 +1038,7 @@ drawtab(Monitor *m) {
 	  if(i >= m->ntabs) break;
 	  if(m->tab_widths[i] >  maxsize) m->tab_widths[i] = maxsize;
 	  w = m->tab_widths[i];
-	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeNorm]);
+	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeTabNorm]);
 	  drw_text(drw, x, 0, w, th, lrpad/2, c->name, 0);
 	  x += w;
 	  ++i;
