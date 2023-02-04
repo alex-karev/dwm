@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx   = 2;        /* border pixel of windows */
-static unsigned int gappx      = 10;        /* gaps between windows */
+static const unsigned int borderpx   = 3;        /* border pixel of windows */
+static unsigned int gappx            = 10;        /* gaps between windows */
 static const unsigned int snap       = 32;       /* snap pixel */
 static const int showbar             = 1;        /* 0 means no bar */
 static const int topbar              = 1;        /* 0 means bottom bar */
@@ -48,7 +48,7 @@ static const char *colors[][3]      = {
 	[SchemeCol4]    = { col_cyan,         col_bg,     col_border },
 	[SchemeCol5]    = { col_purple,       col_bg,     col_border },
 	[SchemeCol6]    = { col_aqua,         col_bg,     col_border },
-	[SchemeSel]     = { col_fg,           col_bg,     col_border  },
+	[SchemeSel]     = { col_fg,           col_bg,     col_border_sel },
 	[SchemeTabNorm] = { col_fg,           col_bg,     col_fg  },
 	[SchemeTabSel]  = { col_bg,           col_fg,     col_border  },
 	[SchemeLayout]  = { col_purple,       col_bg,     col_border  },
