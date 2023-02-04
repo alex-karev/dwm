@@ -124,3 +124,4 @@ cp dunstrc ~/.config/dunst/dunstrc
 * Cut bar title - Cuts bar title to fit specified width
 * Movefullscreen - fullscreen windows can be moved to another monitor
 * Improved cursorwarp - works even when there are no windows on another monitor
+* Gaming mode - switch compositors for gaming

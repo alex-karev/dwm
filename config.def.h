@@ -10,8 +10,10 @@ static const int horizpadbar        = 2;        /* horizontal padding for status
 static const int vertpadbar         = 0;        /* vertical padding for statusbar */
 static const int title_width         = 10;
 static const int comp_integration    = 1;        /* enable compositor integration */
+static unsigned int gamingmode       = 0;        /* enable/disable gaming mode (switch compositors)*/
 static const char *restart_compositor_cmd[] = {"compositor-manager", "-c", "picom", "-r", "0", NULL};
 static const char *restart_compositor_gaps_cmd[] = {"compositor-manager", "-c", "picom", "-r", "15", NULL};
+static const char *restart_compositor_gaming_cmd[] = {"compositor-manager", "-c", "xcompmgr", NULL};
 
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */
@@ -145,6 +147,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,         {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,         {.i = 0  } },
+	{ MODKEY,                       XK_g,      togglegamingmode,{0} },
 	TAGKEYS(                        XK_1,                       0)
 	TAGKEYS(                        XK_2,                       1)
 	TAGKEYS(                        XK_3,                       2)

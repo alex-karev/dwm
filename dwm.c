@@ -234,6 +234,8 @@ static void setdesktopnames(void);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
 static void setgaps(const Arg *arg);
+static void setgamingmode(const Arg *arg);
+static void togglegamingmode(void);
 static void layoutscroll(const Arg *arg);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
@@ -327,6 +329,7 @@ static Clientlist *cl;
 /* Compositor integration */
 static const Arg comp_restart = {.v = restart_compositor_cmd};
 static const Arg comp_restart_gaps = {.v = restart_compositor_gaps_cmd};
+static const Arg comp_restart_gaming = {.v = restart_compositor_gaming_cmd};
 
 struct Pertag {
 	unsigned int curtag, prevtag; /* current and previous tag */
@@ -1908,12 +1911,12 @@ setgaps(const Arg *arg)
 {
 	Monitor* m;
 	if ((arg->i == 0) || (gappx + arg->i < 0)) {
-		if (comp_integration && gappx > 0)
+		if (comp_integration && !gamingmode && gappx > 0)
 			spawn(&comp_restart);
 		gappx = 0;
 	}
 	else {
-		if (comp_integration && gappx <= 0)
+		if (comp_integration && !gamingmode && gappx <= 0)
 			spawn(&comp_restart_gaps);
 		gappx += arg->i;
 	}
@@ -1921,6 +1924,32 @@ setgaps(const Arg *arg)
 	arrange(m);
 	updatebarpos(m);
 	XMoveResizeWindow(dpy, m->barwin, m->wx + gappx, m->by + gappx, m->ww - 2 * gappx, bh);
+	}
+}
+
+void
+setgamingmode(const Arg *arg)
+{
+	if (gamingmode == arg->i || arg->i > 1 || !comp_integration)
+		return;
+	if (gamingmode && !arg->i && gappx > 0)
+		spawn(&comp_restart_gaps);
+	else if (gamingmode && !arg->i)
+		spawn(&comp_restart);
+	else
+		spawn(&comp_restart_gaming);
+	gamingmode = arg->i;
+}
+
+void
+togglegamingmode()
+{
+	if (gamingmode) {
+		Arg a = {.i = 0};
+		setgamingmode(&a);
+	} else {
+		Arg a = {.i = 1};
+		setgamingmode(&a);
 	}
 }
 
