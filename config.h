@@ -10,8 +10,8 @@ static const int horizpadbar         = 10;        /* horizontal padding for stat
 static const int vertpadbar          = 15;        /* vertical padding for statusbar */
 static const int title_width         = 20;
 static const int comp_integration    = 1;        /* enable compositor integration */
-static const char *restart_compositor_cmd[] = {"picom-manager", "-r", "-c", "0", NULL};
-static const char *restart_compositor_gaps_cmd[] = {"picom-manager", "-r", "-c", "15", NULL};
+static const char *restart_compositor_cmd[] = {"compositor-manager", "-c", "picom", "-r", "0", NULL};
+static const char *restart_compositor_gaps_cmd[] = {"compositor-manager", "-c", "picom", "-r", "15", NULL};
 
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */

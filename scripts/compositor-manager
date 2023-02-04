@@ -1,0 +1,44 @@
+#!/bin/bash
+
+HELP_MSG="A script for switching and restarting compositors\nUsage: compositor-manager -c [compositor_name] [arguments]\nAvailable compositors:\n\tpicom\n\txcompmgr\nArguments:\n\t-h - show this message\n\t-c choose compositor\n\t-f - stop all compositors and exit\n\t-r - set corner radius (certain versions of picom only) (default: 0)\n\t-d - set delay before starting/restarting compositor (default: 0.2)"
+
+RADIUS=0
+COMPOSITOR=""
+STOP_COMPOSITOR=false
+DELAY=0.2
+
+# Parse flags and arguments
+while getopts hc:r:d:f flag
+do
+    case "${flag}" in
+        h) echo -e "$HELP_MSG";exit;;
+        c) COMPOSITOR=${OPTARG};;
+        r) RADIUS=${OPTARG};;
+        d) DELAY=${OPTARG};;
+        f) STOP_COMPOSITOR=true;;
+        *) echo -e "$HELP_MSG";exit;;
+    esac
+done
+
+# Exit if no compositor specified and -f flag is not enabled
+if [ "$COMPOSITOR" = "" ] && ! $STOP_COMPOSITOR; then
+    echo -e $HELP_MSG
+    exit
+fi
+
+# Stop all compositors
+killall picom
+killall xcompmgr
+sleep $DELAY
+
+# Exit if -f flag is enabled
+if $STOP_COMPOSITOR; then
+    exit
+fi
+
+# Run compositors
+case "$COMPOSITOR" in
+    "picom") picom -b --corner-radius=$RADIUS ;;
+    "xcompmgr") nohup xcompmgr >/dev/null 2>&1  & ;;
+    *) echo -e "Error: compositor $COMPOSITOR not found!" ;;
+esac
