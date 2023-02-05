@@ -45,7 +45,8 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 
 enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
-       SchemeCol5, SchemeCol6, SchemeSel, SchemeTabNorm, SchemeTabSel, SchemeLayout }; /* color schemes */
+       SchemeCol5, SchemeCol6, SchemeSel, SchemeTabNorm, SchemeTabSel, SchemeLayout,
+	   SchemeScreen1, SchemeScreen2, SchemeScreen3}; /* color schemes */
 
 static const char *colors[][3]      = {
 	/*                      fg          bg          border   */
@@ -60,19 +61,37 @@ static const char *colors[][3]      = {
 	[SchemeTabNorm] = { col_fg,           col_bg,     col_fg  },
 	[SchemeTabSel]  = { col_bg,           col_fg,     col_border  },
 	[SchemeLayout]  = { col_purple,       col_bg,     col_border  },
+	[SchemeScreen1] = { col_red,          col_bg,     col_border  },
+	[SchemeScreen2] = { col_green,        col_bg,     col_border  },
+	[SchemeScreen3] = { col_yellow,       col_bg,     col_border  },
 };
+
+static const unsigned int baralpha        = OPAQUE;
+static const unsigned int bordernormalpha = 204U;
+static const unsigned int borderselalpha  = OPAQUE;
+static const unsigned int alphas[][3]      = {
+	/*                      fg               bg        border     */
+	[SchemeNorm]    = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol1]    = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol2]    = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol3]    = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol4]    = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol5]    = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol6]    = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeSel]     = { OPAQUE,           baralpha,   borderselalpha },
+	[SchemeTabNorm] = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeTabSel]  = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeLayout]  = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeScreen1] = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeScreen2] = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeScreen3] = { OPAQUE,           baralpha,   bordernormalpha },
+};/* alphas */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 /* screen indicators */
 static const char *screen_symbols[] = {"\uf109", "\uf878", "\uf26c"};
-static const char *screen_symbol_colors[][3]      = {
-	/*               fg         bg         border   */
-	[0]          = { col_gray3,  col_gray1,  col_gray2  },
-	[1]          = { col_gray3,  col_gray1,  col_gray2  },
-	[2]          = { col_gray3,  col_gray1,  col_gray2  },
-};
 
 static const Rule rules[] = {
 	/* xprop(1):

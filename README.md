@@ -114,6 +114,7 @@ cp dunstrc ~/.config/dunst/dunstrc
 * [Statuspadding](https://dwm.suckless.org/patches/statuspadding/)
 * [Dwmblocks](https://github.com/torrinfail/dwmblocks)
 * [Alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)
+* [Alpha](https://dwm.suckless.org/patches/alpha/)
 
 ## Custom changes
 * Shifttag - shift window to the next/previous tag
