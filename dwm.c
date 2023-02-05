@@ -236,7 +236,7 @@ static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
 static void setgaps(const Arg *arg);
 static void setgamingmode(const Arg *arg);
-static void togglegamingmode(void);
+static void togglegamingmode(const Arg *arg);
 static void layoutscroll(const Arg *arg);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
@@ -1959,7 +1959,7 @@ setgamingmode(const Arg *arg)
 }
 
 void
-togglegamingmode()
+togglegamingmode(const Arg *arg)
 {
 	if (gamingmode) {
 		Arg a = {.i = 0};
