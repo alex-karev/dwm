@@ -74,7 +74,7 @@ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetDesktopNames, NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetLast }; /* EWMH atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
-enum { ClkTagBar, ClkTabBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
+enum { ClkTagBar, ClkTabBar, ClkLtSymbol, ClkStatusText, ClkScreenSymbol, ClkWinTitle,
        ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
 
 typedef union {
@@ -291,7 +291,7 @@ static char stextc[STATUSLENGTH];
 static char stexts[STATUSLENGTH];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
-static int bh, blw, ble;               /* bar height */
+static int bh;               /* bar height */
 static int wstext;           /* width of status text */
 static int th = 0;           /* tab bar geometry */
 static int lrpad;            /* sum of left and right padding for text */
@@ -551,24 +551,27 @@ buttonpress(XEvent *e)
 		focus(NULL);
 	}
 	if (ev->window == selmon->barwin) {
-        if (ev->x < ble - blw) {
-                i = -1, x = -ev->x;
-                do
-                        x += TEXTW(tags[++i]);
-                while (x <= 0);
-                click = ClkTagBar;
-                arg.ui = 1 << i;
-        } else if (ev->x < ble)
-                click = ClkLtSymbol;
+		i = 0;
+		x = lrpad/2;
+		do
+			x += TEXTW(tags[i]);
+		while (ev->x >= x && ++i < LENGTH(tags));
+		if (i < LENGTH(tags)) {
+			click = ClkTagBar;
+			arg.ui = 1 << i;
+        } else if (ev->x < (x += TEXTW(selmon->ltsymbol)))
+            click = ClkLtSymbol;
+		else if (ev->x < (x += TEXTW(screen_symbols[selmon->num])))
+            click = ClkScreenSymbol;
         else if (ev->x < selmon->ww - wstext)
-                click = ClkWinTitle;
+            click = ClkWinTitle;
         else if ((x = selmon->ww - RSPAD - ev->x) > 0 && (x -= wstext - LSPAD - RSPAD) <= 0) {
-                updatedwmblockssig(x);
-                click = ClkStatusText;
+            updatedwmblockssig(x);
+            click = ClkStatusText;
         } else
-                return;
+            return;
 	}
-	if(ev->window == selmon->tabwin) {
+	else if(ev->window == selmon->tabwin) {
 		i = 0; x = 0;
 		for(c = selmon->cl->clients; c; c = c->next){
 			if(!ISVISIBLE(c, m)) continue;
