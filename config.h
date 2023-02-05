@@ -61,7 +61,7 @@ static const char *colors[][3]      = {
 };/* color schemes */
 
 static const unsigned int baralpha        = OPAQUE;
-static const unsigned int bordernormalpha = 204U;
+static const unsigned int bordernormalpha = OPAQUE;
 static const unsigned int borderselalpha  = OPAQUE;
 static const unsigned int alphas[][3]      = {
 	/*                      fg               bg        border     */
