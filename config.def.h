@@ -45,25 +45,26 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 
 enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
-       SchemeCol5, SchemeCol6, SchemeSel, SchemeTabNorm, SchemeTabSel, SchemeLayout,
+       SchemeCol5, SchemeCol6, SchemeSel, SchemeTabNorm, SchemeTabSel, SchemeLayout, SchemeLauncher,
 	   SchemeScreen1, SchemeScreen2, SchemeScreen3}; /* color schemes */
 
 static const char *colors[][3]      = {
 	/*                      fg          bg          border   */
-	[SchemeNorm]    = { col_fg2,          col_bg,     col_border },
-	[SchemeCol1]    = { col_red,          col_bg,     col_border },
-	[SchemeCol2]    = { col_green,        col_bg,     col_border },
-	[SchemeCol3]    = { col_yellow,       col_bg,     col_border },
-	[SchemeCol4]    = { col_cyan,         col_bg,     col_border },
-	[SchemeCol5]    = { col_purple,       col_bg,     col_border },
-	[SchemeCol6]    = { col_aqua,         col_bg,     col_border },
-	[SchemeSel]     = { col_fg,           col_bg,     col_border  },
-	[SchemeTabNorm] = { col_fg,           col_bg,     col_fg  },
-	[SchemeTabSel]  = { col_bg,           col_fg,     col_border  },
-	[SchemeLayout]  = { col_purple,       col_bg,     col_border  },
-	[SchemeScreen1] = { col_red,          col_bg,     col_border  },
-	[SchemeScreen2] = { col_green,        col_bg,     col_border  },
-	[SchemeScreen3] = { col_yellow,       col_bg,     col_border  },
+	[SchemeNorm]     = { col_fg2,          col_bg,     col_border },
+	[SchemeCol1]     = { col_red,          col_bg,     col_border },
+	[SchemeCol2]     = { col_green,        col_bg,     col_border },
+	[SchemeCol3]     = { col_yellow,       col_bg,     col_border },
+	[SchemeCol4]     = { col_cyan,         col_bg,     col_border },
+	[SchemeCol5]     = { col_purple,       col_bg,     col_border },
+	[SchemeCol6]     = { col_aqua,         col_bg,     col_border },
+	[SchemeSel]      = { col_fg,           col_bg,     col_border  },
+	[SchemeTabNorm]  = { col_fg,           col_bg,     col_fg  },
+	[SchemeTabSel]   = { col_bg,           col_fg,     col_border  },
+	[SchemeLayout]   = { col_purple,       col_bg,     col_border  },
+	[SchemeLauncher] = { col_cyan,         col_bg,     col_border  },
+	[SchemeScreen1]  = { col_red,          col_bg,     col_border  },
+	[SchemeScreen2]  = { col_green,        col_bg,     col_border  },
+	[SchemeScreen3]  = { col_yellow,       col_bg,     col_border  },
 };
 
 static const unsigned int baralpha        = OPAQUE;
@@ -71,20 +72,21 @@ static const unsigned int bordernormalpha = 204U;
 static const unsigned int borderselalpha  = OPAQUE;
 static const unsigned int alphas[][3]      = {
 	/*                      fg               bg        border     */
-	[SchemeNorm]    = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeCol1]    = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeCol2]    = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeCol3]    = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeCol4]    = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeCol5]    = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeCol6]    = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeSel]     = { OPAQUE,           baralpha,   borderselalpha },
-	[SchemeTabNorm] = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeTabSel]  = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeLayout]  = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeScreen1] = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeScreen2] = { OPAQUE,           baralpha,   bordernormalpha },
-	[SchemeScreen3] = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeNorm]     = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol1]     = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol2]     = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol3]     = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol4]     = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol5]     = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeCol6]     = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeSel]      = { OPAQUE,           baralpha,   borderselalpha },
+	[SchemeTabNorm]  = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeTabSel]   = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeLayout]   = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeLauncher] = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeScreen1]  = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeScreen2]  = { OPAQUE,           baralpha,   bordernormalpha },
+	[SchemeScreen3]  = { OPAQUE,           baralpha,   bordernormalpha },
 };/* alphas */
 
 /* tagging */
@@ -92,6 +94,9 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 /* screen indicators */
 static const char *screen_symbols[] = {"\uf109", "\uf878", "\uf26c"};
+
+/* launch menu icon */
+static const char *launcher_symbol = "A";
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -183,6 +188,7 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
+	{ ClkLauncher,          0,              Button1,        setlayout,      {.v = &layouts[2]} },
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },

@@ -126,3 +126,4 @@ cp dunstrc ~/.config/dunst/dunstrc
 * Movefullscreen - fullscreen windows can be moved to another monitor
 * Improved cursorwarp - works even when there are no windows on another monitor
 * Gaming mode - switch compositors for gaming
+* App launcher
