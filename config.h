@@ -178,6 +178,7 @@ static const Layout layouts[] = {
 #define SCREENSHOT_PATH "/home/alex/Pictures/Screenshots"
 static const char *termcmd[]  			  = {"st", NULL };
 static const char *runcmd[]   			  = {"rofi", "-show", "drun"};
+static const char *browsercmd[]           = {"qutebrowser", NULL };
 static const char *menucmd[]              = {"archmenu", NULL};
 static const char *screenshooter[]        = {"flameshot", "full", "-p", SCREENSHOT_PATH, NULL};
 static const char *advancedScreenshooter[]= {"flameshot", "gui", NULL};
@@ -201,6 +202,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_f,      togglefullscreen,{0} },
 	{ MODKEY,                       XK_Return, spawn,           {.v = termcmd } },
 	{ MODKEY,                       XK_r,      spawn,           {.v = runcmd } },
+	{ MODKEY,                       XK_b,      spawn,           {.v = browsercmd } },
 	{ MODKEY,                       XK_j,      focusstack,      {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,       {.i = +1 } },
