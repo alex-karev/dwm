@@ -292,6 +292,8 @@ static char stexts[STATUSLENGTH];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
+static unsigned int gappx;   /* gaps between windows */
+static unsigned int prevgappx;/* save gaps state */
 static int wstext;           /* width of status text */
 static int th = 0;           /* tab bar geometry */
 static int lrpad;            /* sum of left and right padding for text */
@@ -1937,7 +1939,11 @@ void
 setgaps(const Arg *arg)
 {
 	Monitor* m;
-	if ((arg->i == 0) || (gappx + arg->i < 0)) {
+	if (comp_integration && gamingmode && gappx == 0)
+		return;
+	else if (comp_integration && gamingmode)
+		gappx = 0;
+	else if ((arg->i == 0) || (gappx + arg->i < 0)) {
 		if (comp_integration && !gamingmode && gappx > 0)
 			spawn(&comp_restart);
 		gappx = 0;
@@ -1947,10 +1953,11 @@ setgaps(const Arg *arg)
 			spawn(&comp_restart_gaps);
 		gappx += arg->i;
 	}
+
 	for (m = mons; m; m = m->next){
-	arrange(m);
-	updatebarpos(m);
-	XMoveResizeWindow(dpy, m->barwin, m->wx + gappx, m->by + gappx, m->ww - 2 * gappx, bh);
+		arrange(m);
+		updatebarpos(m);
+		XMoveResizeWindow(dpy, m->barwin, m->wx + gappx, m->by + gappx, m->ww - 2 * gappx, bh);
 	}
 }
 
@@ -1959,13 +1966,19 @@ setgamingmode(const Arg *arg)
 {
 	if (gamingmode == arg->i || arg->i > 1 || !comp_integration)
 		return;
-	if (gamingmode && !arg->i && gappx > 0)
-		spawn(&comp_restart_gaps);
-	else if (gamingmode && !arg->i)
-		spawn(&comp_restart);
-	else
-		spawn(&comp_restart_gaming);
+	Arg gapsarg;
+	if (!arg->i) {
+		gapsarg.i = prevgappx;
+		if (prevgappx == 0)
+			spawn(&comp_restart);
+	}
+	else if (arg->i) {
+		gapsarg.i = 0;
+		prevgappx = gappx;
+		spawn(&comp_restart_gaming);	
+	}
 	gamingmode = arg->i;
+	setgaps(&gapsarg);
 }
 
 void
@@ -2052,6 +2065,7 @@ setup(void)
 	lrpad = drw->fonts->h + horizpadbar;
 	bh = drw->fonts->h + 2 + vertpadbar;
 	th = bh;
+	gappx = defaultgappx;
 	updategeom();
 	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
