@@ -25,6 +25,7 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 
 ```
 sudo pacman -S wireless_tools acpi top flameshot rofi trayer dunst pamixer libcanberra xorg-xbacklight
+yay -S xmenu
 ```
 
 2. Clone this repo, build and install dwm:

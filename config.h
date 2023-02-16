@@ -178,6 +178,7 @@ static const Layout layouts[] = {
 #define SCREENSHOT_PATH "/home/alex/Pictures/Screenshots"
 static const char *termcmd[]  			  = {"st", NULL };
 static const char *runcmd[]   			  = {"rofi", "-show", "drun"};
+static const char *menucmd[]              = {"archmenu", NULL};
 static const char *screenshooter[]        = {"flameshot", "full", "-p", SCREENSHOT_PATH, NULL};
 static const char *advancedScreenshooter[]= {"flameshot", "gui", NULL};
 static const char *filemanager[]          = {"rofi", "-show", "filebrowser"};
@@ -269,9 +270,9 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLauncher,          0,              Button1,        setlayout,      {.v = &layouts[2]} },
+	{ ClkLauncher,          0,              Button1,        spawn,          {.v = menucmd} },
 	{ ClkLtSymbol,          0,              Button1,        layoutscroll,   {.i = +1} },
-	{ ClkScreenSymbol,      0,              Button1,        setlayout,      {.v = &layouts[2]} },
+	{ ClkScreenSymbol,      0,              Button1,        focusmon,       {.i = +1} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },

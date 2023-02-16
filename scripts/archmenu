@@ -1,0 +1,42 @@
+#!/bin/sh
+
+xmenu <<EOF | sh &
+Display
+	Extended               		st
+	Laptop                 		st
+	Extended (Type C)      		st
+	Extended (Right)       		st
+	Extended (VNC)         		st
+	Mirrore                		st
+	Mirrored (Scaled)      		st
+	HDMI                   		st
+Touchpad and Keyboard
+	Enable Touchscreen     		st
+	Keyboard OFF             	st
+	Keyboard ON            		st
+	Touchpad ON            		st
+	Touchpad OFF           		st
+	Tap-to-Click ON        		st
+	Tap-to-Click OFF       		st
+	Touchpad Speed Level 1 		st
+	Touchpad Speed Level 2 		st
+	Touchpad Speed Level 3 		st
+Power
+	Sleep OFF              		st
+	Sleep ON               		st
+	Lid OFF                		st
+	Powersaving ON         		st
+	Powersaving OFF        		st
+	TLP ON                 		st
+	TLP OFF                		st
+	Thermald ON            		st
+	Thermald OFF           		st
+	Powertop ON            		st
+	Xboxdrv OFF            		st
+Nvidia Prime
+	Integrated Mode        		st
+	Hybrid Mode            		st
+	Nvidia Mode            		st
+Terminal     		st
+Reload dwm     		killall dwm
+EOF
