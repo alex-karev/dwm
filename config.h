@@ -13,7 +13,7 @@ static const int comp_integration    = 1;        /* enable compositor integratio
 static unsigned int gamingmode       = 0;        /* enable/disable gaming mode (switch compositors)*/
 static const char *restart_compositor_cmd[] = {"compositor-manager", "-c", "picom", "-r", "0", NULL};
 static const char *restart_compositor_gaps_cmd[] = {"compositor-manager", "-c", "picom", "-r", "15", NULL};
-static const char *restart_compositor_gaming_cmd[] = {"compositor-manager", "-c", "xcompmgr", NULL};
+static const char *restart_compositor_gaming_cmd[] = {"compositor-manager", "-f", NULL};
 
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */
