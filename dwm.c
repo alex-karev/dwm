@@ -2105,6 +2105,11 @@ setup(void)
 	updatebars();
 	updatestatus();
 	updatebarpos(selmon);
+    /* set gaps */
+    if (comp_integration && !gamingmode) {
+        if (defaultgappx > 0) spawn(&comp_restart_gaps);
+        else spawn(&comp_restart);
+    }
 	/* supporting window for NetWMCheck */
 	wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
