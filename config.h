@@ -2,13 +2,14 @@
 
 /* appearance */
 static const unsigned int borderpx   = 3;        /* border pixel of windows */
-static unsigned int defaultgappx     = 10;        /* gaps between windows */
+static unsigned int defaultgappx     = 0;        /* gaps between windows */
 static const unsigned int snap       = 32;       /* snap pixel */
 static const int showbar             = 1;        /* 0 means no bar */
 static const int topbar              = 1;        /* 0 means bottom bar */
 static const int horizpadbar         = 10;        /* horizontal padding for statusbar */
 static const int vertpadbar          = 15;        /* vertical padding for statusbar */
 static const int title_width         = 15;
+static const int tab_width           = 15;
 static const int comp_integration    = 1;        /* enable compositor integration */
 static unsigned int gamingmode       = 0;        /* enable/disable gaming mode (switch compositors)*/
 static const char *restart_compositor_cmd[] = {"compositor-manager", "-c", "picom", "-r", "0", NULL};
@@ -84,10 +85,10 @@ static const unsigned int alphas[][3]      = {
 };/* alphas */
 
 /* tagging */
-static const char *tags[] = {"\uf121", "\uf0ac", "\uf040", "\uf11b", "\uf03e", "\uf086", "\uf02d", "\uf992", "\uf233"};
+static const char *tags[] = {"\uf121", "\uf0ac", "\uf040", "\uf11b", "\uf03e", "\uf086", "\uf02d", "\uf013", "\uf233"};
 
 /* screen indicators */
-static const char *screen_symbols[] = {"\uf109", "\uf878", "\uf26c"};
+static const char *screen_symbols[] = {"\uf109", "\U000f0379", "\uf26c"};
 
 /* launch menu icon */
 static const char *launcher_symbol = "\uf303";
@@ -121,6 +122,7 @@ static const Rule rules[] = {
 	{ "Godot",                   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "UnityHub",                NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Lutris",                  NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "com.github.tkashkin.gamehub", NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "Steam",                   NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "itch",                    NULL,       NULL,       1 << 3,       0,           -1 },
 	  
@@ -150,6 +152,8 @@ static const Rule rules[] = {
 	{ "Vmplayer",                NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "scrcpy",                  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "org.remmina.Remmina",     NULL,       NULL,       1 << 8,       0,           -1 },
+	
+    { "obsidian",                NULL,       NULL,       0,            0,           -1 },
 };
 
 /* layout(s) */
@@ -179,6 +183,7 @@ static const Layout layouts[] = {
 static const char *termcmd[]  			  = {"st", NULL };
 static const char *runcmd[]   			  = {"rofi", "-show", "drun"};
 static const char *browsercmd[]           = {"qutebrowser", NULL };
+static const char *notescmd[]             = {"obsidian", NULL };
 static const char *menucmd[]              = {"archmenu", NULL};
 static const char *screenshooter[]        = {"flameshot", "full", "-p", SCREENSHOT_PATH, NULL};
 static const char *advancedScreenshooter[]= {"flameshot", "gui", NULL};
@@ -203,6 +208,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,           {.v = termcmd } },
 	{ MODKEY,                       XK_r,      spawn,           {.v = runcmd } },
 	{ MODKEY,                       XK_b,      spawn,           {.v = browsercmd } },
+	{ MODKEY,                       XK_n,      spawn,           {.v = notescmd } },
 	{ MODKEY,                       XK_j,      focusstack,      {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,       {.i = +1 } },

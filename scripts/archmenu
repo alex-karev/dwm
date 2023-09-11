@@ -1,42 +1,57 @@
 #!/bin/sh
 
+LAPTOP_DISPLAY="eDP-1"
+LAPTOP_DISPLAY_MODE="1920x1080"
+HDMI_DISPLAY="HDMI-1-0"
+HDMI_DISPLAY_MODE="1920x1080"
+TYPE_C_DISPLAY="DP-1"
+TYPE_C_DISPLAY_MODE="1920x1080"
+VNC_DISPLAY="HDMI-1"
+VNC_DISPLAY_MODE="1920x1080_60.00"
+TOUCHPAD="'DELL0824:00 06CB:7E92 Touchpad'"
+TOUCHSCREEN="'ELAN Touchscreen'"
+TOUCHSCREEN_DISPLAY="DP-1"
+
 xmenu <<EOF | sh &
 Display
-	Extended               		st
-	Laptop                 		st
-	Extended (Type C)      		st
-	Extended (Right)       		st
-	Extended (VNC)         		st
-	Mirrore                		st
-	Mirrored (Scaled)      		st
-	HDMI                   		st
+	Laptop                 		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $HDMI_DISPLAY --off 
+	HDMI                   		xrandr --output $HDMI_DISPLAY --mode $LAPTOP_DISPLAY_MODE --transform none --auto --primary --output $LAPTOP_DISPLAY --off
+	Extended               		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $HDMI_DISPLAY --mode $HDMI_DISPLAY_MODE --transform none --auto --left-of $LAPTOP_DISPLAY
+	Extended (Right)       		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $HDMI_DISPLAY --mode $HDMI_DISPLAY_MODE --transform none --auto --right-of $LAPTOP_DISPLAY
+	Extended (Type C)      		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $TYPE_C_DISPLAY --mode $TYPE_C_DISPLAY_MODE --transform none --auto --left-of $LAPTOP_DISPLAY
+	Extended (Type C Right)		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $TYPE_C_DISPLAY --mode $TYPE_C_DISPLAY_MODE --transform none --auto --right-of $LAPTOP_DISPLAY
+	Extended (VNC)         		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $VNC_DISPLAY --mode $VNC_DISPLAY_MODE --transform none --auto --right-of $LAPTOP_DISPLAY
+	Extended (VNC Right)   		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $VNC_DISPLAY --mode $VNC_DISPLAY_MODE --transform none --auto --right-of $LAPTOP_DISPLAY
+	Mirrored               		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $HDMI_DISPLAY --mode $HDMI_DISPLAY_MODE --auto --transform none --same-as $LAPTOP_DISPLAY
+	Mirrored (Scaled)      		xrandr --output $LAPTOP_DISPLAY --mode $LAPTOP_DISPLAY_MODE --auto --primary --output $HDMI_DISPLAY --mode $HDMI_DISPLAY_MODE --auto --scale-from 1920x1080 --same-as $LAPTOP_DISPLAY
 Touchpad and Keyboard
-	Enable Touchscreen     		st
-	Keyboard OFF             	st
-	Keyboard ON            		st
-	Touchpad ON            		st
-	Touchpad OFF           		st
-	Tap-to-Click ON        		st
-	Tap-to-Click OFF       		st
-	Touchpad Speed Level 1 		st
-	Touchpad Speed Level 2 		st
-	Touchpad Speed Level 3 		st
+	Enable Touchscreen     		xinput --map-to-output $TOUCHSCREEN $TOUCHSCREEN_DISPLAY
+	Keyboard OFF             	keyboardset -f
+	Keyboard ON            		keyboardset -r
+	Touchpad ON            		xinput set-prop $TOUCHPAD 'Device Enabled' 1
+	Touchpad OFF           		xinput set-prop $TOUCHPAD 'Device Enabled' 0
+	Tap-to-Click ON        		xinput set-prop $TOUCHPAD 'libinput Tapping Enabled' 1
+	Tap-to-Click OFF       		xinput set-prop $TOUCHPAD 'libinput Tapping Enabled' 0
+	Touchpad Speed Level 1 		xinput set-prop $TOUCHPAD 'libinput Accel Speed' 0
+	Touchpad Speed Level 2 		xinput set-prop $TOUCHPAD 'libinput Accel Speed' 0.3
+	Touchpad Speed Level 3 		xinput set-prop $TOUCHPAD 'libinput Accel Speed' 0.5
 Power
-	Sleep OFF              		st
-	Sleep ON               		st
-	Lid OFF                		st
-	Powersaving ON         		st
-	Powersaving OFF        		st
-	TLP ON                 		st
-	TLP OFF                		st
-	Thermald ON            		st
-	Thermald OFF           		st
-	Powertop ON            		st
-	Xboxdrv OFF            		st
+	Sleep OFF              		xset s off -dpms
+	Sleep ON               		xset s on +dpms
+	Lid OFF                		systemd-inhibit --what=handle-lid-switch sleep 99999999
+	Powersaving ON         		powersaving --on
+	Powersaving OFF        		powersaving --off
+	TLP ON                 		kdesu systemctl start tlp
+	TLP OFF                		kdesu systemctl stop tlp
+	Thermald ON            		kdesu systemctl start thermald
+	Thermald OFF           		kdesu systemctl stop thermald
+	Powertop ON            		kdesu systemctl start powertop
+	Xboxdrv OFF            		kdesu systemctl stop xboxdrv
 Nvidia Prime
-	Integrated Mode        		st
-	Hybrid Mode            		st
-	Nvidia Mode            		st
+	$(optimus-manager --print-mode)
+	Integrated Mode        		optimus-manager --switch integrated --no-confirm
+	Hybrid Mode            		optimus-manager --switch hybrid --no-confirm
+	Nvidia Mode            		optimus-manager --switch nvidia --no-confirm
 Terminal     		st
 Reload dwm     		killall dwm
 EOF

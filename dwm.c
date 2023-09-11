@@ -1064,6 +1064,7 @@ drawtab(Monitor *m) {
 	} else{
 	  maxsize = m->ww - gappx*2;
 	}
+    if (maxsize > TEXTW("")*tab_width) maxsize = TEXTW("")*tab_width;
 	i = 0;
 	for(c = m->cl->clients; c; c = c->next){
 	  if(!ISVISIBLE(c, m)) continue;

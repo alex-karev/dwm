@@ -9,6 +9,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 0;        /* vertical padding for statusbar */
 static const int title_width         = 10;
+static const int tab_width           = 10;
 static const int comp_integration    = 1;        /* enable compositor integration */
 static unsigned int gamingmode       = 0;        /* enable/disable gaming mode (switch compositors)*/
 static const char *restart_compositor_cmd[] = {"compositor-manager", "-c", "picom", "-r", "0", NULL};

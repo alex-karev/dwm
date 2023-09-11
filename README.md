@@ -24,7 +24,7 @@ Forked from: [suckless.org](https://dwm.suckless.org/)
 1. Install dependencies:
 
 ```
-sudo pacman -S wireless_tools acpi top flameshot rofi trayer dunst pamixer libcanberra xorg-xbacklight
+sudo pacman -S wireless_tools acpi top flameshot rofi trayer dunst pamixer libcanberra xorg-xbacklight kdesu
 yay -S xmenu
 ```
 
