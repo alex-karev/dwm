@@ -1051,6 +1051,7 @@ drawtab(Monitor *m) {
 	  if(!ISVISIBLE(c, m)) continue;
 	  m->tab_widths[m->ntabs] = TEXTW(c->name);
 	  tot_width += m->tab_widths[m->ntabs];
+      tot_width += borderpx;
 	  ++m->ntabs;
 	  if(m->ntabs >= MAXTABS) break;
 	}
@@ -1062,7 +1063,7 @@ drawtab(Monitor *m) {
 	  for(i = 0; i < m->ntabs; ++i){
 	    if(tot_width + (m->ntabs - i) * sorted_label_widths[i] > m->ww)
 	      break;
-	    tot_width += sorted_label_widths[i];
+	    tot_width += sorted_label_widths[i] + borderpx;
 	  }
 	  maxsize = (m->ww - tot_width  - gappx*2) / (m->ntabs - i);
 	} else{
