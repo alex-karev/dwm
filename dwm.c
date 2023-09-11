@@ -1021,6 +1021,10 @@ drawtab(Monitor *m) {
 	int x = 0;
 	int w = 0;
 
+	/* Clear bar area */
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	drw_text(drw, 0, 0, m->mw - gappx, bh, lrpad / 2, "", 0);
+
 	//view_info: indicate the tag which is displayed in the view
 	for(i = 0; i < LENGTH(tags); ++i){
 	  if((selmon->tagset[selmon->seltags] >> i) & 1) {
@@ -1073,7 +1077,7 @@ drawtab(Monitor *m) {
 	  w = m->tab_widths[i];
 	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeTabNorm]);
 	  drw_text(drw, x, 0, w, th, lrpad/2, c->name, 0);
-	  x += w;
+	  x += w + borderpx;
 	  ++i;
 	}
 
