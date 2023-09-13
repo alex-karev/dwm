@@ -116,6 +116,7 @@ cp dunstrc ~/.config/dunst/dunstrc
 * [Dwmblocks](https://github.com/torrinfail/dwmblocks)
 * [Alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)
 * [Alpha](https://dwm.suckless.org/patches/alpha/)
+* [Ignore Transient Windows](https://dwm.suckless.org/patches/ignore_transient_windows/)
 
 ## Custom changes
 * Shifttag - shift window to the next/previous tag
