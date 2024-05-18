@@ -42,7 +42,7 @@ sudo make install
 ```
 chmod +x scripts/*
 cp scripts/* ~/.local/bin/
-cp statbar.conf ~/.config/statbar.conf
+cp ./config/statbar.conf ~/.config/statbar.conf
 ```
 
 4. *OPTIONAL:* Add ```$HOME/.local/bin``` to path
@@ -79,16 +79,22 @@ sudo make install
 ```
 /usr/bin/dunst -conf $HOME/.config/dunst/dunstrc &
 dwmblocks &
-exec dwm-start
+while type dwm >/dev/null ; do dwm && continue || break ; done
 ```
 
 7. *OPTIONAL:* Copy dunstrc to ```~/.config/dunst/```:
+
 ```
 mkdir ~/.config/dunst
-cp dunstrc ~/.config/dunst/dunstrc
+cp ./config/dunstrc ~/.config/dunst/dunstrc
 ```
 
-8. *OPTIONAL:* For rounded corners support use [this](https://github.com/ibhagwan/picom-ibhagwan-git.git) fork of ```picom```
+8. *OPTIONAL:* Set rofi config:
+```
+mkdir ~/.config/rofi
+cp ./config/rofi/config.rasi ~/.config/rofi/config.rasi
+cp ./config/rofi/CatppuccinHero.rasi ~/.config/rofi/CatppuccinHero.rasi
+```
 
 ## Configuration
 * Edit ```config.h``` to change keybindings, appearance and default apps. Recompile and reinstall dwm.
