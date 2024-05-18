@@ -1,0 +1,8 @@
+@theme "~/.config/rofi/CatppuccinHero.rasi"
+configuration {
+  dpi: 192;
+}
+window {
+  width: 1000px;
+}
+

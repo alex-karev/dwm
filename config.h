@@ -23,21 +23,21 @@ enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= 0;               /* False means bottom tab bar */
 
-static const char *fonts[]          = {"Hack Nerd Font:size=14" };
+static const char *fonts[]          = {"FantasqueSansM Nerd Font:size=12" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_bg[]          = "#282828";
-static const char col_fg[]          = "#ebdbb2";
-static const char col_fg1[]         = "#928374";
-static const char col_fg2[]         = "#504945";
-static const char col_border[]      = "#282828";
-static const char col_border_sel[]  = "#ebdbb2";
-static const char col_gray[]        = "#928374";
-static const char col_red[]         = "#fb4934";
-static const char col_green[]       = "#b8bb26";
-static const char col_yellow[]      = "#fabd2f";
-static const char col_cyan[]        = "#83a598";
-static const char col_purple[]      = "#d3869b";
-static const char col_aqua[]        = "#8ec07c";
+static const char col_bg[]          = "#1e1e2e";
+static const char col_fg[]          = "#cdd6f4";
+static const char col_fg1[]         = "#9399b2";
+static const char col_fg2[]         = "#7f849c";
+static const char col_border[]      = "#313244";
+static const char col_border_sel[]  = "#cdd6f4";
+static const char col_gray[]        = "#bac2de";
+static const char col_red[]         = "#f38ba8";
+static const char col_green[]       = "#a6e3a1";
+static const char col_yellow[]      = "#f9e2af";
+static const char col_cyan[]        = "#94e2d5";
+static const char col_purple[]      = "#cba6f7";
+static const char col_aqua[]        = "#89b4fa";
 
 enum { SchemeNorm, SchemeCol1, SchemeCol2, SchemeCol3, SchemeCol4,
        SchemeCol5, SchemeCol6, SchemeSel, SchemeTabNorm, SchemeTabSel, SchemeLayout, SchemeLauncher,
@@ -56,7 +56,7 @@ static const char *colors[][3]      = {
 	[SchemeTabNorm]  = { col_fg,           col_fg2,    col_border  },
 	[SchemeTabSel]   = { col_bg,           col_fg,     col_border  },
 	[SchemeLayout]   = { col_purple,       col_bg,     col_border  },
-	[SchemeLauncher] = { col_cyan,         col_bg,     col_border  },
+	[SchemeLauncher] = { col_aqua,         col_bg,     col_border  },
 	[SchemeScreen1]  = { col_red,          col_bg,     col_border },
 	[SchemeScreen2]  = { col_green,        col_bg,     col_border  },
 	[SchemeScreen3]  = { col_yellow,       col_bg,     col_border  },
@@ -119,6 +119,7 @@ static const Rule rules[] = {
 	{ "Cinelerra",               NULL,       NULL,       1 << 2,       0,           -1,       0 },
 	{ "Blender",                 NULL,       NULL,       1 << 2,       0,           -1,       0 },
 	{ "Audacity",                NULL,       NULL,       1 << 2,       0,           -1,       0 },
+	{ "draw.io",                 NULL,       NULL,       1 << 2,       0,           -1,       0 },
 	  
 	{ "Godot",                   NULL,       NULL,       1 << 3,       0,           -1,       0 },
 	{ "UnityHub",                NULL,       NULL,       1 << 3,       0,           -1,       0 },
@@ -136,17 +137,19 @@ static const Rule rules[] = {
 	{ "fluent-reader",           NULL,       NULL,       1 << 4,       0,           -1,       0 },
 	  
 	{ "discord",                 NULL,       NULL,       1 << 5,       0,           -1,       0 },
-	{  NULL,                     NULL,   "wechat.exe",   1 << 5,       0,           -1,       0 },
+	{ "electronic-wechat",       NULL,       NULL,       1 << 5,       0,           -1,       0 },
+	{ "wechat",                  NULL,       NULL,       1 << 5,       0,           -1,       0 },
 	{ "TelegramDesktop",         NULL,       NULL,       1 << 5,       0,           -1,       0 },
 	  
 	{ "calibre",                 NULL,       NULL,       1 << 6,       0,           -1,       0 },
+  { "obsidian",                NULL,       NULL,       1 << 6,       0,           -1,       0 },
+	{ "Zotero",                  NULL,       NULL,       1 << 6,       0,           -1,       0 },
 	{ "Wps",                     NULL,       NULL,       1 << 6,       0,           -1,       0 },
 	{ "Et",                      NULL,       NULL,       1 << 6,       0,           -1,       0 },
 	{ "Wpp",                     NULL,       NULL,       1 << 6,       0,           -1,       0 },
 	{ "Evince",                  NULL,       NULL,       1 << 6,       0,           -1,       0 },
 	{ "Komikku",                 NULL,       NULL,       1 << 6,       0,           -1,       0 },
 	  
-	{ "obs",                     NULL,       NULL,       1 << 7,       0,           -1,       0 },
 	{ "Uget-gtk",                NULL,       NULL,       1 << 7,       0,           -1,       0 },
 	  
 	{ "Virt-manager",            NULL,       NULL,       1 << 8,       0,           -1,       0 },
@@ -154,7 +157,6 @@ static const Rule rules[] = {
 	{ "scrcpy",                  NULL,       NULL,       1 << 8,       0,           -1,       0 },
 	{ "org.remmina.Remmina",     NULL,       NULL,       1 << 8,       0,           -1,       0 },
 	
-    { "obsidian",                NULL,       NULL,       0,            0,           -1,       0 },
 };
 
 /* layout(s) */
@@ -181,8 +183,8 @@ static const Layout layouts[] = {
 
 /* commands */
 #define SCREENSHOT_PATH "/home/alex/Pictures/Screenshots"
-static const char *termcmd[]  			  = {"st", NULL };
-static const char *runcmd[]   			  = {"rofi", "-show", "drun"};
+static const char *termcmd[]  			      = {"st", NULL };
+static const char *runcmd[]   			      = {"rofi", "-show", "drun"};
 static const char *browsercmd[]           = {"qutebrowser", NULL };
 static const char *notescmd[]             = {"obsidian", NULL };
 static const char *menucmd[]              = {"archmenu", NULL};
@@ -190,7 +192,7 @@ static const char *screenshooter[]        = {"flameshot", "full", "-p", SCREENSH
 static const char *advancedScreenshooter[]= {"flameshot", "gui", NULL};
 static const char *filemanager[]          = {"rofi", "-show", "filebrowser"};
 static const char *toggletray[]           = {"toggle-tray", "-c", "#282828"};
-static const char *settingsmenu[]         = {"st", "settings-menu"};
+static const char *settingsmenu[]         = {"archmenu", NULL};
 static const char *tasklist[]             = {"rofi", "-show", "window"};
 static const char *increaseBrightness[]   = {"dunst-brightness", "-inc", "10", NULL};
 static const char *fullBrightness[]       = {"dunst-brightness", "-set", "100", NULL};
@@ -199,7 +201,7 @@ static const char *offBrightness[]        = {"dunst-brightness", "-set", "0", NU
 static const char *increaseVolume[]       = {"dunst-volume", "-i", "5"};
 static const char *decreaseVolume[]       = {"dunst-volume", "-d", "5"};
 static const char *muteVolume[]           = {"dunst-volume", "-t"};
-static const char *closeDwm[]			  = {"killall", "dwm-start", NULL};
+static const char *closeDwm[]			        = {"killall", "dwm", NULL};
 
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
@@ -227,6 +229,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,             {.ui = ~0 } },
 	{ MODKEY,                       XK_Down,   focusmon,        {.i = -1 } },
 	{ MODKEY,                       XK_Up,     focusmon,        {.i = +1 } },
+	{ MODKEY,                       XK_bracketright,  focusmon, {.i = +1 } },
+	{ MODKEY,                       XK_bracketleft,   focusmon, {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,          {.i = -1 } },
 	{ MODKEY,                       XK_Right,  shiftview,       {.i = +1 } },
 	{ MODKEY,                       XK_Left,   shiftview,       {.i = -1 } },

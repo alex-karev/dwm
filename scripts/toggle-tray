@@ -21,4 +21,4 @@ done
 TRAY_BG=$(echo $TRAY_BG | cut -c2-)
 TRAY_BG_DECIMAL=$(echo "obase=10; ibase=16; $TRAY_BG" | bc)
 
-pkill trayer || trayer --tint $TRAY_BG_DECIMAL --width 20 --edge right --distancefrom left --distance 10 #--distancefrom left --distance 200
+pkill trayer || trayer --tint $TRAY_BG_DECIMAL --width 15 --height 40 --edge bottom --margin 50 --distance 15 --padding 10

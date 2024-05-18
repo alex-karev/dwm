@@ -3,17 +3,22 @@
 # Arbitrary but unique message tag
 msgTag="dunstbrightness"
 
-# Change the volume using alsa(might differ if you use pulseaudio)
+max_brightness=$(brightnessctl m)
+brightness_step=$(echo "scale=2; $max_brightness/100*$2" | bc)
+brightness_step=$(printf "%.0f" $brightness_step)
 
 if [[ "$1" == "-inc" ]]; then
-    sudo xbacklight -inc $2
+    brightnessctl s $brightness_step+
 elif [[ "$1" == "-dec" ]]; then
-    sudo xbacklight -dec $2
+    brightnessctl s $brightness_step-
 elif [[ "$1" == "-set" ]]; then
-    sudo xbacklight -set $2
+    brightnessctl s $brightness_step
 fi
 
-brightness=$(sudo xbacklight -get)
+brightness=$(brightnessctl g)
+brightness=$(echo "scale=2; 100/$max_brightness*$brightness" | bc)
+brightness=$(printf "%.0f" $brightness)
+
 icon="display-brightness-symbolic"
 
 dunstify -i $icon -h string:x-dunst-stack-tag:$msgTag \
