@@ -34,6 +34,9 @@ for arg in "$@"; do
         battery=$(acpi | grep -o -P '(?<=, ).*(?=%)')
         if [ "$battery_status" = "Discharging" ]; then
             echo -e $BATTERY_COLOR$BATTERY_DISCHARGE_ICON $battery%
+	    if [ "$battery" -lt $BATTERY_DISCHARGE_THRESHOLD ]; then
+		dunstify -i $BATTERY_LOW_ICON -h string:x-dunst-stack-tag:$BATTERY_WARNING_TAG -t $BATTERY_WARNING_TIMEOUT "$BATTERY_WARNING_TITLE" "$BATTERY_WARNING_TEXT"
+	    fi
         else
             echo -e $BATTERY_COLOR$BATTERY_CHARGE_ICON $battery%
         fi
